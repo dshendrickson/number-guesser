@@ -1,28 +1,55 @@
-var randomNumber
-var userNumber
-var feedbackText
-var guessButton = document.querySelector('.guess-button');
-var guessResponse = document.querySelector('.guess-response');
+var h1 = document.querySelector('h1');
+var h3 = document.querySelector('h3');
 
-function getRandomNum{
-  randomNumber = Math.floor((Math.random() * 100) + 1);
+//** Local Variables
+var randomNumber = '';
+var userNumber = '';
+var feedbackText = '';
+
+//** Tag Variables
+var guessResponse = document.querySelector('.guess-response');
+var lastGuess = document.querySelector('.last-guess')
+
+//** Button Variables
+var guessButton = document.querySelector('.guess-button');
+var clearButton = document.querySelector('.clear-button');
+var resetButton = document.querySelector('.reset-button');
+
+
+function getRandomNum (){
+  randomNumber =  Math.floor((Math.random() * 100) + 1);
 };
 
 guessButton.addEventListener('click', function () {
-  userNumber = parseInt(document.querySelector('.input-box'));
+  h1.innerText = 'I AM A GUESS!!!';
+  h3.innerText = getRandomNum ();
+  // userNumber = parseInt(document.querySelector('.input-box'));
+  // userNumber = parseInt(3);
 
-  if (userNumber = randomNumber) { guessResponse.innerText = "You win!" };
-  if (userNumber < randomNumber) { guessResponse.innerText = "Sorry, that guess is too low. Try another number"}
-  if (userNumber > randomNumber) { guessResponse.innerText = "Sorry, that guess is too high. Try another number"}
-
+  // if (userNumber = randomNumber) {
+  //   // guessResponse.innerText = "You win!"
+  //   h3.innerText = "You win!"
+  //
+  // };
+  // if (userNumber < randomNumber) {
+  //   //  guessResponse.innerText = "Sorry, that guess is too low. Try another number"
+  //    h3.innerText = "Sorry, that guess is too low. Try another number"
+  //
+  //  };
+  // if (userNumber > randomNumber) {
+  //   //  guessResponse.innerText = "Sorry, that guess is too high. Try another number"
+  //    h3.innerText = "Sorry, that guess is too high. Try another number"
+  //
+  // };
+  // else {
+  //   h1.innerText = 'I AM A GUESS!!!';
+  // };
 });
 
-function {
-if randomNumber is equal to userNumber then return "Hit!"
-if randomNumber is less than userNumber then return to high
-if randomNumber is greater than userNumber then return to low
-};
+clearButton.addEventListener('click', function () {
+  h1.innerText = 'I AM A CLEAR!!!'
+})
 
-if Reset Game buttonn clicked function {
-  randomNumber = ''
-};
+resetButton.addEventListener('click', function () {
+  h1.innerText = 'I AM A RESET!!!';
+});
