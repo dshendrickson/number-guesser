@@ -36,13 +36,21 @@ guessButton.addEventListener('click', function () {
 
   h3.innerText = userNumber;
 
-  if (userNumber === randomNumber) {
-    guessResponse.innerText = "You Win!";
-  } else if (userNumber > randomNumber){
-    guessResponse.innerText = "Sorry, that guess is too high. Try another number"
-  } else  {
-    guessResponse.innerText = "Sorry, that guess is too low. Try another number."
-  };
+  if (isNaN(userNumber)) {
+    h3.innerText = "Entry Must be a number";
+  } else if (userNumber<=100 && userNumber>=1) {
+
+      if (userNumber === randomNumber) {
+        guessResponse.innerText = "You Win!";
+      } else if (userNumber > randomNumber) {
+        guessResponse.innerText = "Sorry, that guess is too high. Try another number"
+      } else {
+        guessResponse.innerText = "Sorry, that guess is too low. Try another number."
+      };
+
+  } else {
+    h3.innerText = "Please pick a number between 1 and 100";
+};
 });
 //   if (userNumber === randomNumber) {
 //     guessResponse.innerText = "You Win!";
@@ -67,5 +75,5 @@ resetButton.addEventListener('click', function() {
   h1.innerText = 'I AM A RESET!!!';
   h3.innerText ='?';
   userInput.value = '';
-   getRandomNum ();
+  getRandomNum ();
 });
