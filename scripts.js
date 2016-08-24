@@ -6,7 +6,7 @@ var h3 = document.querySelector('h3');
 var randomNumber =  Math.floor((Math.random() * 100) + 1);
 var userNumber = '';
 var feedbackText = '';
-var userInput ='';
+var userInput = document.querySelector('#user-input');
 
 
 //** Tag Variables
@@ -36,8 +36,17 @@ guessButton.addEventListener('click', function () {
 
   h3.innerText = userNumber;
 
+  // if (userNumber === randomNumber) {
+  //   guessResponse.innerText = "You Win!";
+  // } else if (userNumber > randomNumber){
+  //   guessResponse.innerText = "Sorry, that guess is too high. Try another number"
+  // } else  {
+  //   guessResponse.innerText = "Sorry, that guess is too low. Try another number."
+  // };
+
   if (userNumber === randomNumber) {
     guessResponse.innerText = "You Win!";
+    return;
   };
   if (userNumber > randomNumber){
     guessResponse.innerText = "Sorry, that guess is too high. Try another number"
@@ -47,7 +56,10 @@ guessButton.addEventListener('click', function () {
 });
 
 clearButton.addEventListener('click', function () {
-  h1.innerText = 'I AM A CLEAR!!!'
+  userInput = '';
+  userNumber = '';
+  guessResponse.innerText = "Give it your best guess!";
+  h1.innerText = 'I AM A CLEAR!!!';
 });
 
 resetButton.addEventListener('click', function () {
