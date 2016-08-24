@@ -2,8 +2,8 @@
 var h1 = document.querySelector('h1');
 var h3 = document.querySelector('h3');
 
-//** Local Variables
-var randomNumber =  Math.floor((Math.random() * 100) + 1);
+//** global Variables
+var randomNumber =Math.floor((Math.random() * 100) + 1);
 var userNumber = '';
 var feedbackText = '';
 var userInput = document.querySelector('#user-input');
@@ -36,33 +36,36 @@ guessButton.addEventListener('click', function () {
 
   h3.innerText = userNumber;
 
-  // if (userNumber === randomNumber) {
-  //   guessResponse.innerText = "You Win!";
-  // } else if (userNumber > randomNumber){
-  //   guessResponse.innerText = "Sorry, that guess is too high. Try another number"
-  // } else  {
-  //   guessResponse.innerText = "Sorry, that guess is too low. Try another number."
-  // };
-
   if (userNumber === randomNumber) {
     guessResponse.innerText = "You Win!";
-    return;
-  };
-  if (userNumber > randomNumber){
+  } else if (userNumber > randomNumber){
     guessResponse.innerText = "Sorry, that guess is too high. Try another number"
   } else  {
     guessResponse.innerText = "Sorry, that guess is too low. Try another number."
   };
 });
+//   if (userNumber === randomNumber) {
+//     guessResponse.innerText = "You Win!";
+//     return;
+//   };
+//   if (userNumber > randomNumber){
+//     guessResponse.innerText = "Sorry, that guess is too high. Try another number"
+//   } else  {
+//     guessResponse.innerText = "Sorry, that guess is too low. Try another number."
+//   };
+// });
 
 clearButton.addEventListener('click', function () {
-  userInput = '';
+  userInput.value = '';
   userNumber = '';
   guessResponse.innerText = "Give it your best guess!";
   h1.innerText = 'I AM A CLEAR!!!';
+  h3.innerText='?';
 });
 
-resetButton.addEventListener('click', function () {
+resetButton.addEventListener('click', function() {
   h1.innerText = 'I AM A RESET!!!';
-  h3.innerText = getRandomNum ();
+  h3.innerText ='?';
+  userInput.value = '';
+   getRandomNum ();
 });
