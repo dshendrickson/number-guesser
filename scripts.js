@@ -2,9 +2,10 @@ var h1 = document.querySelector('h1');
 var h3 = document.querySelector('h3');
 
 //** Local Variables
-var randomNumber = '';
+var randomNumber = Math.floor((Math.random() * 100) + 1);
 var userNumber = '';
 var feedbackText = '';
+var userInput = '';
 
 //** Tag Variables
 var guessResponse = document.querySelector('.guess-response');
@@ -18,11 +19,20 @@ var resetButton = document.querySelector('.reset-button');
 
 function getRandomNum (){
   randomNumber =  Math.floor((Math.random() * 100) + 1);
+  console.log('hello!');
+  return randomNumber;
 };
 
 guessButton.addEventListener('click', function () {
   h1.innerText = 'I AM A GUESS!!!';
-  h3.innerText = getRandomNum ();
+  var userInput = document.querySelector('#user-input');
+  h3.innerText = parseInt(userInput.value);
+  console.log(userInput.value);
+
+
+  // h3.innerText = Math.floor((Math.random() * 100) + 1);
+  // h3.innerText = getRandomNum ();
+
   // userNumber = parseInt(document.querySelector('.input-box'));
   // userNumber = parseInt(3);
 
@@ -52,4 +62,5 @@ clearButton.addEventListener('click', function () {
 
 resetButton.addEventListener('click', function () {
   h1.innerText = 'I AM A RESET!!!';
+  h3.innerText = getRandomNum ();
 });
