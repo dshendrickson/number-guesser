@@ -2,10 +2,11 @@ var h1 = document.querySelector('h1');
 var h3 = document.querySelector('h3');
 
 //** Local Variables
-var randomNumber = Math.floor((Math.random() * 100) + 1);
+var randomNumber =  Math.floor((Math.random() * 100) + 1);
 var userNumber = '';
 var feedbackText = '';
-var userInput = '';
+var userInput ='';
+
 
 //** Tag Variables
 var guessResponse = document.querySelector('.guess-response');
@@ -19,20 +20,33 @@ var resetButton = document.querySelector('.reset-button');
 
 function getRandomNum (){
   randomNumber =  Math.floor((Math.random() * 100) + 1);
-  console.log('hello!');
+
   return randomNumber;
 };
+
+
 
 guessButton.addEventListener('click', function () {
   h1.innerText = 'I AM A GUESS!!!';
   var userInput = document.querySelector('#user-input');
-  h3.innerText = parseInt(userInput.value);
-  console.log(userInput.value);
+
+  console.log(userInput.value)
+
+userNumber = parseInt(userInput.value,10);
+console.log(userNumber)
+if (userNumber === randomNumber) {
+  h3.innerText = "You Win!";
+};
+if (userNumber > randomNumber){
+  h3.innerText = "Sorry your guess was too high!"
+}
+  else  {
+  h3.innerText = "Sorry your guess was too low!"
+};
+});
 
 
-  // h3.innerText = Math.floor((Math.random() * 100) + 1);
   // h3.innerText = getRandomNum ();
-
   // userNumber = parseInt(document.querySelector('.input-box'));
   // userNumber = parseInt(3);
 
@@ -54,7 +68,7 @@ guessButton.addEventListener('click', function () {
   // else {
   //   h1.innerText = 'I AM A GUESS!!!';
   // };
-});
+
 
 clearButton.addEventListener('click', function () {
   h1.innerText = 'I AM A CLEAR!!!'
@@ -63,4 +77,5 @@ clearButton.addEventListener('click', function () {
 resetButton.addEventListener('click', function () {
   h1.innerText = 'I AM A RESET!!!';
   h3.innerText = getRandomNum ();
+
 });
