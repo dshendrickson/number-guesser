@@ -16,7 +16,7 @@ var inputMax = document.querySelector('#input-max');
 //** global Variables
 var userNumber = '';
 var feedbackText = '';
-var randomNumber = Math.floor(Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value;
+var randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
 var newMin = '';
 var newMax = '';
 
@@ -35,8 +35,7 @@ var rangeButton = document.querySelector('.range-button');
 rangeButton.addEventListener('click', function () {
   inputMin = parseInt(inputMin.value);
   inputMax = parseInt(inputMax.value);
-  randomNumber = Math.floor(Math.random() * (inputMax + inputMin) - inputMin);
-  // getRandomNum ();
+  randomNumber = getRandomNum();
 });
 
 userInput.addEventListener('keyup', function () {
@@ -48,12 +47,12 @@ userInput.addEventListener('keyup', function () {
   }
 });
 
-rangeButton.addEventListener('click', function () {
-  h1.innerText = 'I AM A GUESS!!!';
-
-  var inputMin = document.querySelector('#input-min').value;
-  var inputMax = document.querySelector('#input-max').value;
-});
+// rangeButton.addEventListener('click', function () {
+//   h1.innerText = 'I AM A GUESS!!!';
+//
+//   var inputMin = document.querySelector('#input-min').value;
+//   var inputMax = document.querySelector('#input-max').value;
+// });
 
 guessButton.addEventListener('click', function () {
   var userInput = document.querySelector('#user-input');
@@ -90,17 +89,18 @@ resetButton.addEventListener('click', function() {
   resetGuessResponse ();
   deactivateClear ();
   deactivateReset ();
-  // getRandomNum ();
+  getRandomNum ();
 });
 
 //** Local Functions
 
 function returnGuessResponse () {
+  activateReset();
   if (userNumber === randomNumber) {
     guessResponse.innerText = "You Win!";
-    newMin = inputMin.value;
-    newMax = inputMax.value;
-  randomNumber =  Math.floor(Math.random() * (parseInt(newMax.value) - (newMin.value) + 1) + inputMin.value);
+
+
+
   } else if (userNumber > randomNumber) {
     guessResponse.innerText = "Sorry, that guess is too high. Try another number."
   } else {
@@ -109,7 +109,7 @@ function returnGuessResponse () {
 };
 
 function getRandomNum (){
-  randomNumber =  Math.floor(Math.random() * (parseInt(inputMax.value) - parseInt(inputMin.value) + 1) + parseInt(inputMin.value));
+  randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
 };
 
 function activateClear () {
