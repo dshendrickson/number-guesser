@@ -16,7 +16,7 @@ var inputMax = document.querySelector('#input-max');
 //** global Variables
 var userNumber = '';
 var feedbackText = '';
-var randomNumber = Math.floor(Math.random() * (parseInt(inputMax.value) - parseInt(inputMin.value)) + parseInt(inputMin.value));
+var randomNumber = Math.floor(Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value;
 var newMin = '';
 var newMax = '';
 
@@ -59,6 +59,9 @@ guessButton.addEventListener('click', function () {
   var userInput = document.querySelector('#user-input');
   userNumber = parseInt(userInput.value,10);
 
+  var inputMin = document.querySelector('#input-min').value;
+  var inputMax = document.querySelector('#input-max').value;
+
   h3.innerText = userNumber;
 
   if (isNaN(userNumber)) {
@@ -87,7 +90,7 @@ resetButton.addEventListener('click', function() {
   resetGuessResponse ();
   deactivateClear ();
   deactivateReset ();
-  getRandomNum ();
+  // getRandomNum ();
 });
 
 //** Local Functions
@@ -95,10 +98,9 @@ resetButton.addEventListener('click', function() {
 function returnGuessResponse () {
   if (userNumber === randomNumber) {
     guessResponse.innerText = "You Win!";
-    newMin = inputMin - 49;
-    newMax = inputMax + 49;
-    randomNumber = Math.floor(Math.random() * (newMax + newMin) - newMin);
-    activateReset ();
+    newMin = inputMin.value;
+    newMax = inputMax.value;
+  randomNumber =  Math.floor(Math.random() * (parseInt(newMax.value) - (newMin.value) + 1) + inputMin.value);
   } else if (userNumber > randomNumber) {
     guessResponse.innerText = "Sorry, that guess is too high. Try another number."
   } else {
@@ -107,8 +109,7 @@ function returnGuessResponse () {
 };
 
 function getRandomNum (){
-  randomNumber =  Math.floor(Math.random() * (parseInt(inputMax.value) + (inputMin.value)) - inputMin.value);
-  return randomNumber;
+  randomNumber =  Math.floor(Math.random() * (parseInt(inputMax.value) - parseInt(inputMin.value) + 1) + parseInt(inputMin.value));
 };
 
 function activateClear () {
