@@ -57,8 +57,8 @@ var inputMax = document.querySelector('#input-max');
 var userNumber = '';
 var feedbackText = '';
 var randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
-var newMin = '';
-var newMax = '';
+var newMin = parseInt(inputMin.value);
+var newMax = parseInt(inputMax.value)
 
 //** Tag Variables
 var guessResponse = document.querySelector('.guess-response');
@@ -96,10 +96,10 @@ guessButton.addEventListener('click', function () {
     h3.innerText = "Entry must be an integer.";
     resetGuessResponse ();
     activateReset ();
-  } else if (userNumber <= inputMax && userNumber >= inputMin) {
+  } else if (userNumber <= newMax && userNumber >= newMin) {
       returnGuessResponse ();
   } else {
-      h3.innerText = "Please pick a number between " +  inputMin + " and " + inputMax;
+      h3.innerText = "Please pick a number between " +  newMin + " and " + newMax;
       resetGuessResponse ();
       activateReset ();
   };
@@ -117,9 +117,12 @@ resetButton.addEventListener('click', function() {
 });
 
 rangeButton.addEventListener('click', function () {
-  var inputMin = document.querySelector('#input-min');
-  var inputMax = document.querySelector('#input-max');
-  randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
+  inputMin = document.querySelector('#input-min');
+  inputMax = document.querySelector('#input-max');
+  newMin = parseInt(inputMin.value);
+  newMax = parseInt(inputMax.value)
+  // randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
+    randomNumber = Math.floor((Math.random() * (newMax - newMin + 1)) + newMin);
 });
 
 //** Local Functions
@@ -128,9 +131,9 @@ function returnGuessResponse () {
   activateReset();
   if (userNumber === randomNumber) {
     guessResponse.innerText = "You Win!";
-    inputMin = parseInt(inputMin.value) - 10;
-    inputMax = parseInt(inputMax.value) + 10;
-    randomNumber = Math.floor((Math.random() * (((inputMax.value) - (inputMin.value) + 1))) + (inputMin.value));
+    newMin = newMin - 10;
+    newMax = newMax + 10;
+    randomNumber = Math.floor((Math.random() * (((newMax) - (newMin) + 1))) + (newMin));
   } else if (userNumber > randomNumber) {
     guessResponse.innerText = "Sorry, that guess is too high. Try another number."
   } else {
