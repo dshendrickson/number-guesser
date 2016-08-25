@@ -17,6 +17,8 @@ var inputMax = document.querySelector('#input-max');
 var userNumber = '';
 var feedbackText = '';
 var randomNumber = Math.floor(Math.random() * (parseInt(inputMax.value) - parseInt(inputMin.value)) + parseInt(inputMin.value));
+var newMin = '';
+var newMax = '';
 
 //** Tag Variables
 var guessResponse = document.querySelector('.guess-response');
@@ -93,6 +95,9 @@ resetButton.addEventListener('click', function() {
 function returnGuessResponse () {
   if (userNumber === randomNumber) {
     guessResponse.innerText = "You Win!";
+    newMin = inputMin - 49;
+    newMax = inputMax + 49;
+    randomNumber = Math.floor(Math.random() * (newMax + newMin) - newMin);
     activateReset ();
   } else if (userNumber > randomNumber) {
     guessResponse.innerText = "Sorry, that guess is too high. Try another number."
