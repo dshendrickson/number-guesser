@@ -28,3 +28,6 @@ text-align: center;
   height: 22%;
   width: 50%;
 }
+button {
+  cursor: pointer;
+}

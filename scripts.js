@@ -47,7 +47,6 @@
 // 2: Application runs but the code has long functions, unnecessary or poorly named variables, and needs significant refactoring
 // 1: Application generates syntax error or crashes during execution
 
-
 //** User Input Varialbles
 var userInput = document.querySelector('#user-input');
 var inputMin = document.querySelector('#input-min');
@@ -56,13 +55,13 @@ var inputMax = document.querySelector('#input-max');
 //** global Variables
 var userNumber = '';
 var feedbackText = '';
-var randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
 var newMin = parseInt(inputMin.value);
-var newMax = parseInt(inputMax.value)
+var newMax = parseInt(inputMax.value);
+var randomNumber = Math.floor((Math.random() * (newMax - newMin + 1)) + newMin);
 
 //** Tag Variables
 var guessResponse = document.querySelector('.guess-response');
-var lastGuess = document.querySelector('.last-guess')
+var lastGuess = document.querySelector('.last-guess');
 var h1 = document.querySelector('h1');
 var h3 = document.querySelector('h3');
 
@@ -86,7 +85,6 @@ userInput.addEventListener('keyup', function () {
 guessButton.addEventListener('click', function () {
   var userInput = document.querySelector('#user-input');
   userNumber = parseInt(userInput.value,10);
-
   var inputMin = document.querySelector('#input-min').value;
   var inputMax = document.querySelector('#input-max').value;
 
@@ -99,7 +97,7 @@ guessButton.addEventListener('click', function () {
   } else if (userNumber <= newMax && userNumber >= newMin) {
       returnGuessResponse ();
   } else {
-      h3.innerText = "Please pick a number between " +  newMin + " and " + newMax;
+      h3.innerText = "Please pick a number between " + newMin + " and " + newMax;
       resetGuessResponse ();
       activateReset ();
   };
@@ -121,8 +119,7 @@ rangeButton.addEventListener('click', function () {
   inputMax = document.querySelector('#input-max');
   newMin = parseInt(inputMin.value);
   newMax = parseInt(inputMax.value)
-  // randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
-    randomNumber = Math.floor((Math.random() * (newMax - newMin + 1)) + newMin);
+  randomNumber = Math.floor((Math.random() * (newMax - newMin + 1)) + newMin);
 });
 
 //** Local Functions
@@ -133,16 +130,14 @@ function returnGuessResponse () {
     guessResponse.innerText = "You Win!";
     newMin = newMin - 10;
     newMax = newMax + 10;
+    inputMin.value = newMin;
+    inputMax.value = newMax;
     randomNumber = Math.floor((Math.random() * (((newMax) - (newMin) + 1))) + (newMin));
   } else if (userNumber > randomNumber) {
     guessResponse.innerText = "Sorry, that guess is too high. Try another number."
   } else {
     guessResponse.innerText = "Sorry, that guess is too low. Try another number."
   };
-};
-
-function getRandomNum (){
-  randomNumber = Math.floor((Math.random() * (inputMax.value - inputMin.value + 1)) + inputMin.value);
 };
 
 function activateClear () {
