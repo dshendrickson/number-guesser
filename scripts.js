@@ -1,13 +1,22 @@
+// //** Local Functions
+// function getRandomNum (){
+//   randomNumber =  Math.floor(Math.random() * (100 + 1) - 1);
+//   return randomNumber;
+// };
+
 //** Development and Testing Variables
 var h1 = document.querySelector('h1');
 var h3 = document.querySelector('h3');
 
+//** User Input Varialbles
+var userInput = document.querySelector('#user-input');
+var inputMin = document.querySelector('#input-min');
+var inputMax = document.querySelector('#input-max');
+
 //** global Variables
-var randomNumber =Math.floor((Math.random() * 100) + 1);
 var userNumber = '';
 var feedbackText = '';
-var userInput = document.querySelector('#user-input');
-
+var randomNumber = Math.floor(Math.random() * (parseInt(inputMax.value) - parseInt(inputMin.value)) + parseInt(inputMin.value));
 
 //** Tag Variables
 var guessResponse = document.querySelector('.guess-response');
@@ -17,63 +26,106 @@ var lastGuess = document.querySelector('.last-guess')
 var guessButton = document.querySelector('.guess-button');
 var clearButton = document.querySelector('.clear-button');
 var resetButton = document.querySelector('.reset-button');
+var rangeButton = document.querySelector('.range-button');
 
+//** Event fucntions
 
-function getRandomNum (){
-  randomNumber =  Math.floor((Math.random() * 100) + 1);
-  return randomNumber;
-};
+rangeButton.addEventListener('click', function () {
+  inputMin = parseInt(inputMin.value);
+  inputMax = parseInt(inputMax.value);
+  randomNumber = Math.floor(Math.random() * (inputMax + inputMin) - inputMin);
+  // getRandomNum ();
+});
+
+userInput.addEventListener('keyup', function () {
+  if(userInput.value !== '') {
+    activateClear();
+  }
+  if(userInput.value === '') {
+    deactivateClear();
+  }
+});
+
+rangeButton.addEventListener('click', function () {
+  h1.innerText = 'I AM A GUESS!!!';
+
+  var inputMin = document.querySelector('#input-min').value;
+  var inputMax = document.querySelector('#input-max').value;
+});
 
 guessButton.addEventListener('click', function () {
-  h1.innerText = 'I AM A GUESS!!!';
   var userInput = document.querySelector('#user-input');
-
-  console.log(userInput.value);
-
   userNumber = parseInt(userInput.value,10);
-
-  console.log(userNumber);
 
   h3.innerText = userNumber;
 
   if (isNaN(userNumber)) {
-    h3.innerText = "Entry Must be a number";
-  } else if (userNumber<=100 && userNumber>=1) {
+    h3.innerText = "Entry must be an integer.";
+    resetGuessResponse ();
+  } else if (userNumber <= inputMax && userNumber >= inputMin) {
 
-      if (userNumber === randomNumber) {
-        guessResponse.innerText = "You Win!";
-      } else if (userNumber > randomNumber) {
-        guessResponse.innerText = "Sorry, that guess is too high. Try another number"
-      } else {
-        guessResponse.innerText = "Sorry, that guess is too low. Try another number."
-      };
+    returnGuessResponse ();
 
   } else {
-    h3.innerText = "Please pick a number between 1 and 100";
-};
+    h3.innerText = "Please pick a number between " +  inputMin + " and " + inputMax;
+    resetGuessResponse ();
+  };
 });
-//   if (userNumber === randomNumber) {
-//     guessResponse.innerText = "You Win!";
-//     return;
-//   };
-//   if (userNumber > randomNumber){
-//     guessResponse.innerText = "Sorry, that guess is too high. Try another number"
-//   } else  {
-//     guessResponse.innerText = "Sorry, that guess is too low. Try another number."
-//   };
-// });
 
 clearButton.addEventListener('click', function () {
-  userInput.value = '';
   userNumber = '';
-  guessResponse.innerText = "Give it your best guess!";
-  h1.innerText = 'I AM A CLEAR!!!';
-  h3.innerText='?';
+  resetInputValue ();
+  resetGuessResponse ();
+  deactivateClear ();
 });
 
 resetButton.addEventListener('click', function() {
-  h1.innerText = 'I AM A RESET!!!';
   h3.innerText ='?';
-  userInput.value = '';
+  resetInputValue ();
+  resetGuessResponse ();
+  deactivateClear ();
+  deactivateReset ();
   getRandomNum ();
 });
+
+//** Local Functions
+
+function returnGuessResponse () {
+  if (userNumber === randomNumber) {
+    guessResponse.innerText = "You Win!";
+    activateReset ();
+  } else if (userNumber > randomNumber) {
+    guessResponse.innerText = "Sorry, that guess is too high. Try another number."
+  } else {
+    guessResponse.innerText = "Sorry, that guess is too low. Try another number."
+  };
+};
+
+function getRandomNum (){
+  randomNumber =  Math.floor(Math.random() * (parseInt(inputMax.value) + (inputMin.value)) - inputMin.value);
+  return randomNumber;
+};
+
+function activateClear () {
+  clearButton.disabled = false;
+};
+
+function deactivateClear () {
+  clearButton.disabled = true;
+};
+
+function activateReset () {
+  resetButton.disabled = false;
+};
+
+function deactivateReset () {
+  resetButton.disabled = true;
+};
+
+function resetGuessResponse () {
+  guessResponse.innerText = "Give it your best guess!";
+};
+
+function resetInputValue () {
+    userInput.value = '';
+};

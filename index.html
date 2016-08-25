@@ -6,6 +6,9 @@
   </head>
   <body>
     <h1>Number Guesser</h1>
+    <input id="input-min" type="number" value="1"/>
+    <input id="input-max" type="number" value="100"/>
+    <button class="range-button">Submit Range</button>
     <div class="intro-text">
       <p>
         Your last guess was...
@@ -19,12 +22,12 @@
     <div class="guess-response">
         Give it your best guess!
     </div>
-    <input id="user-input" type="text" name="number" placeholder="Guess a Number"/>
+    <input id="user-input" type="number" placeholder="Guess a Number"/>
     <div class="buttons">
       <button class="guess-button">Guess</button>
-      <button class="clear-button">Clear</button>
-      <button class="reset-button">Reset</button>
+      <button class="clear-button" disabled="true">Clear</button>
+      <button class="reset-button" disabled="true">Reset</button>
     </div>
+    <script type="text/javascript" src="scripts.js"></script>
   </body>
-  <script type="text/javascript" src="scripts.js"></script>
 </html>
